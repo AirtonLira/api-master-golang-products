@@ -1,9 +1,9 @@
 package main
 
 import (
-	"api-crud/controllers"
-	"api-crud/database"
-	"api-crud/utils"
+	"api-master-golang-products/controllers"
+	"api-master-golang-products/database"
+	"api-master-golang-products/utils"
 	"fmt"
 	"log"
 	"net/http"

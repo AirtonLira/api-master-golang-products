@@ -1,7 +1,7 @@
 package database
 
 import (
-	"api-crud/entities"
+	"api-master-golang-products/entities"
 	"log"
 
 	"gorm.io/driver/sqlserver"

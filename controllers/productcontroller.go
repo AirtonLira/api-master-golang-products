@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"api-crud/database"
-	"api-crud/entities"
-	"api-crud/utils"
+	"api-master-golang-products/database"
+	"api-master-golang-products/entities"
+	"api-master-golang-products/utils"
 	"encoding/json"
 	"net/http"
 
