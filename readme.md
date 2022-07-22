@@ -16,4 +16,4 @@ Golang API to register products in SQL Server with the maximum design systems, r
 1. API Restfull 
 2. Gorm ORM to connect SQL Server
 3. Authentication with JWT
-4. Timeout to 5 seconds in context applicatino and httpserver
+4. Timeout to 5 seconds in context application and httpserver
