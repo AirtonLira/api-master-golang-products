@@ -1,0 +1,4 @@
+{
+    "port": 8089,
+    "connection_string": "sqlserver://sa:mssql1Ipw@localhost:1433?database=teste"
+}
