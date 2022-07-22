@@ -13,6 +13,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var TIME_OUT = time.Second * 5
+
 func Home(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "JWT IS VALID")
 }
@@ -20,7 +22,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	pctx := context.Background()
-	ctx, cancel := context.WithTimeout(pctx, 1*time.Second)
+	ctx, cancel := context.WithTimeout(pctx, TIME_OUT)
 
 	defer cancel()
 	// Load config files from application.json using Viper
@@ -38,6 +40,16 @@ func main() {
 	// Start Server
 	log.Printf("Starting Server on port %s", utils.AppConfig.Port)
 	http.ListenAndServe(fmt.Sprintf(":%v", utils.AppConfig.Port), router)
+
+	srv := &http.Server{
+		Handler:      router,
+		Addr:         ":8089",
+		WriteTimeout: TIME_OUT,
+		ReadTimeout:  TIME_OUT,
+	}
+
+	log.Println("Listen at port :8000")
+	log.Fatal(srv.ListenAndServe())
 
 }
 
