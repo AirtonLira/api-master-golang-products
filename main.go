@@ -4,9 +4,11 @@ import (
 	"api-master-golang-products/controllers"
 	"api-master-golang-products/database"
 	"api-master-golang-products/utils"
+	"context"
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -16,6 +18,11 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
+	pctx := context.Background()
+	ctx, cancel := context.WithTimeout(pctx, 1*time.Second)
+
+	defer cancel()
 	// Load config files from application.json using Viper
 	utils.LoadAppConfig()
 
@@ -26,7 +33,7 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	// Register Routes paths
-	RegisterProductRouters(router)
+	RegisterProductRouters(ctx, router)
 
 	// Start Server
 	log.Printf("Starting Server on port %s", utils.AppConfig.Port)
@@ -34,7 +41,7 @@ func main() {
 
 }
 
-func RegisterProductRouters(router *mux.Router) {
+func RegisterProductRouters(ctx context.Context, router *mux.Router) {
 	router.HandleFunc("/api/products", controllers.CreateProduct).Methods("POST")
 	router.HandleFunc("/api/products/{id}", controllers.GetProductById).Methods("GET")
 	router.Handle("/api/validjwt", utils.ValidateJWT(Home))
